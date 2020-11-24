@@ -1,8 +1,8 @@
 <?php
 
-namespace Drupal\wmcontroller_flysystem\Storage;
+namespace Drupal\wmpage_cache_flysystem\Storage;
 
-use Drupal\wmcontroller\Entity\Cache;
+use Drupal\wmpage_cache\Cache;
 use League\Flysystem\FilesystemInterface;
 
 class ContentStorage

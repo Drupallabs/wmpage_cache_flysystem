@@ -1,0 +1,33 @@
+parameters:
+    # Backend storage responsible for keeping track of tags and cache entries
+    wmpage_cache_flysystem.backend_storage: wmpage_cache.storage.mysql
+
+    wmpage_cache_flysystem.scheme: local
+    wmpage_cache_flysystem.directory: wmpage_cache
+
+services:
+    wmpage_cache_flysystem.filesystem:
+        class: League\Flysystem\FilesystemInterface
+        factory: Drupal\wmpage_cache_flysystem\FileSystemFactory::create
+        arguments:
+            - '@flysystem_factory'
+            - '%wmpage_cache_flysystem.scheme%'
+
+    wmpage_cache_flysystem.content_storage:
+        class: Drupal\wmpage_cache_flysystem\Storage\ContentStorage
+        arguments:
+            - '@wmpage_cache_flysystem.filesystem'
+            - '%wmpage_cache_flysystem.directory%'
+
+    wmpage_cache_flysystem.backend_storage:
+        class: Drupal\wmpage_cache\Storage\StorageInterface
+        factory: Drupal\wmpage_cache\ServiceFactory::create
+        arguments:
+            - '@service_container'
+            - '%wmpage_cache_flysystem.backend_storage%'
+
+    wmpage_cache.storage.flysystem:
+        class: Drupal\wmpage_cache_flysystem\Storage\FlySystemStorage
+        arguments:
+            - '@wmpage_cache_flysystem.backend_storage'
+            - '@wmpage_cache_flysystem.content_storage'

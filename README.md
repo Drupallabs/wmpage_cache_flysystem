@@ -1,11 +1,11 @@
-wmcontroller_flysystem
+wmpage_cache_flysystem
 ======================
 
-[![Latest Stable Version](https://poser.pugx.org/wieni/wmcontroller_flysystem/v/stable)](https://packagist.org/packages/wieni/wmcontroller_flysystem)
-[![Total Downloads](https://poser.pugx.org/wieni/wmcontroller_flysystem/downloads)](https://packagist.org/packages/wieni/wmcontroller_flysystem)
-[![License](https://poser.pugx.org/wieni/wmcontroller_flysystem/license)](https://packagist.org/packages/wieni/wmcontroller_flysystem)
+[![Latest Stable Version](https://poser.pugx.org/wieni/wmpage_cache_flysystem/v/stable)](https://packagist.org/packages/wieni/wmpage_cache_flysystem)
+[![Total Downloads](https://poser.pugx.org/wieni/wmpage_cache_flysystem/downloads)](https://packagist.org/packages/wieni/wmpage_cache_flysystem)
+[![License](https://poser.pugx.org/wieni/wmpage_cache_flysystem/license)](https://packagist.org/packages/wieni/wmpage_cache_flysystem)
 
-> A [Flysystem](https://flysystem.thephpleague.com) cache storage for [wieni/wmcontroller](https://github.com/wieni/wmcontroller)
+> A [Flysystem](https://flysystem.thephpleague.com) cache storage for [wieni/wmpage_cache](https://github.com/wieni/wmpage_cache)
 
 ## Installation
 
@@ -13,19 +13,19 @@ This package requires PHP 7.1 and Drupal 8 or higher. It can be
 installed using Composer:
 
 ```bash
- composer require wieni/wmcontroller_flysystem
+ composer require wieni/wmpage_cache_flysystem
 ```
 
 To enable this cache storage, change the following container parameters:
 ```yaml
 parameters:
-    wmcontroller.cache.storage: wmcontroller.cache.storage.flysystem
+    wmpage_cache.storage: wmpage_cache.cache.storage.flysystem
 
     # Backend storage responsible for keeping track of tags and cache entries
-    wmcontroller.cache.flysystem.backend.storage: wmcontroller.cache.storage.mysql
+    wmpage_cache_flysystem.backend_storage: wmpage_cache.cache.storage.mysql
 
-    wmcontroller.cache.flysystem.scheme: wmcontrollerscheme
-    wmcontroller.cache.flysystem.directory: wmcontroller
+    wmpage_cache_flysystem.scheme: wmpage_cachescheme
+    wmpage_cache_flysystem.directory: wmpage_cache
 ```
 
 Make sure to also set the flysystem scheme in `settings.php`.
@@ -34,7 +34,7 @@ Make sure to also set the flysystem scheme in `settings.php`.
 // settings.php
 
 $settings['flysystem'] = [
-    'wmcontrollerscheme' => [
+    'wmpage_cachescheme' => [
         'driver' => 'local',
         'config' => [
             'root' => 'sites/default/cache',
@@ -48,7 +48,7 @@ $settings['flysystem'] = [
 // Or if you want to store your cache on S3
 // This requires the drupal/flysystem_s3 module
 $settings['flysystem'] = [
-    'wmcontrollerscheme' => [
+    'wmpage_cachescheme' => [
         'driver' => 's3',
         'config' => [
             'key' => $_ENV['S3_KEY'],

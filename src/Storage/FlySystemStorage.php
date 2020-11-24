@@ -1,10 +1,10 @@
 <?php
 
-namespace Drupal\wmcontroller_flysystem\Storage;
+namespace Drupal\wmpage_cache_flysystem\Storage;
 
-use Drupal\wmcontroller\Entity\Cache;
-use Drupal\wmcontroller\Exception\NoSuchCacheEntryException;
-use Drupal\wmcontroller\Service\Cache\Storage\StorageInterface;
+use Drupal\wmpage_cache\Cache;
+use Drupal\wmpage_cache\Exception\NoSuchCacheEntryException;
+use Drupal\wmpage_cache\Storage\StorageInterface;
 
 class FlySystemStorage implements StorageInterface
 {

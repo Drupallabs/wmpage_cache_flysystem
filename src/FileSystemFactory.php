@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\wmcontroller_flysystem;
+namespace Drupal\wmpage_cache_flysystem;
 
 use Drupal\flysystem\FlysystemFactory;
 use League\Flysystem\FilesystemInterface;
