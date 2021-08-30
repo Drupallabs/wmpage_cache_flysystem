@@ -21,7 +21,7 @@ class FlySystemStorage implements StorageInterface
         $this->contentStorage = $contentStorage;
     }
 
-    public function load($id, $includeBody = true)
+    public function load(string $id, bool $includeBody = true): Cache
     {
         /** @var Cache $item */
         $item = $this->loadMultiple([$id], $includeBody)->current();
@@ -32,7 +32,7 @@ class FlySystemStorage implements StorageInterface
         return $item;
     }
 
-    public function loadMultiple(array $ids, $includeBody = true): \Iterator
+    public function loadMultiple(array $ids, bool $includeBody = true): \Iterator
     {
         foreach ($this->storage->loadMultiple($ids, $includeBody) as $item) {
             $item = $this->contentStorage->readBodyOnFileSystem($item);
@@ -44,32 +44,32 @@ class FlySystemStorage implements StorageInterface
         }
     }
 
-    public function set(Cache $item, array $tags)
+    public function set(Cache $item, array $tags): void
     {
-        return $this->storage->set(
+        $this->storage->set(
             $this->contentStorage->storeBodyOnFileSystem($item),
             $tags
         );
     }
 
-    public function remove(array $ids)
+    public function remove(array $ids): void
     {
         $this->storage->remove($ids);
         $this->contentStorage->removeFromFileSystem($ids);
     }
 
-    public function flush()
+    public function flush(): void
     {
         $this->storage->flush();
         $this->contentStorage->flushFileSystem();
     }
 
-    public function getByTags(array $tags)
+    public function getByTags(array $tags): array
     {
         return $this->storage->getByTags($tags);
     }
 
-    public function getExpired($amount)
+    public function getExpired(int $amount): array
     {
         return $this->storage->getExpired($amount);
     }
